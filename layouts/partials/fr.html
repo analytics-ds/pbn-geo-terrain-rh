@@ -1,0 +1,2 @@
+{{- /* Typographie française : espace insécable devant les ponctuations doubles et le pourcentage, pour qu'elles ne tombent jamais seules en début de ligne. */ -}}
+{{- return (string . | replaceRE ` ([:;!?%»])` " $1" | replaceRE `« ` "« ") -}}

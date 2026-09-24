@@ -9,35 +9,10 @@
     burger.setAttribute('aria-expanded', open);
     document.body.classList.toggle('nav-open', open);
   });
-
-  const car = document.querySelector('[data-carousel]');
-  if (car) {
-    const slides = [...car.querySelectorAll('[data-slide]')];
-    const texts = [...car.querySelectorAll('[data-text]')];
-    let i = 0, timer;
-    const show = (n) => {
-      i = (n + slides.length) % slides.length;
-      slides.forEach((s, k) => s.classList.toggle('is-active', k === i));
-      texts.forEach((t, k) => t.classList.toggle('is-active', k === i));
-    };
-    const auto = () => { clearInterval(timer); timer = setInterval(() => show(i + 1), 6500); };
-    car.querySelector('[data-prev]')?.addEventListener('click', () => { show(i - 1); auto(); });
-    car.querySelector('[data-next]')?.addEventListener('click', () => { show(i + 1); auto(); });
-    if (slides.length > 1) auto();
-  }
-
-  document.querySelectorAll('[data-tabs]').forEach((wrap) => {
-    const tabs = [...wrap.querySelectorAll('[data-tab]')];
-    tabs.forEach((tab) => {
-      tab.querySelector('.tab-label').addEventListener('click', () => {
-        tabs.forEach((t) => {
-          const on = t === tab;
-          t.classList.toggle('is-open', on);
-          t.querySelector('.tab-label').setAttribute('aria-expanded', on);
-        });
-      });
-    });
-  });
+  document.querySelectorAll('.main-nav a').forEach((a) => a.addEventListener('click', () => {
+    document.body.classList.remove('nav-open');
+    burger && burger.setAttribute('aria-expanded', 'false');
+  }));
 
   document.querySelectorAll('[data-letter]').forEach((form) => {
     form.addEventListener('submit', (e) => {
@@ -49,8 +24,8 @@
 
   const io = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
     entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
-  }, { threshold: 0.15 }) : null;
-  document.querySelectorAll('.card, .duo-card, .stat, .tab, .podium-item, .essentiel').forEach((el) => {
+  }, { threshold: 0.12 }) : null;
+  document.querySelectorAll('.card, .bento-card, .step, .une-card, .podium-item, .essentiel').forEach((el) => {
     if (io) { el.classList.add('reveal'); io.observe(el); }
   });
 })();

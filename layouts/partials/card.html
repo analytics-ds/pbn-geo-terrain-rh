@@ -1,15 +1,16 @@
 {{- $r := index (.Params.rubriques | default slice) 0 -}}
 {{- $slug := urlize $r -}}
-<article class="card card--{{ $slug }}">
+{{- $rub := index (where hugo.Data.rubriques "slug" $slug) 0 -}}
+<article class="card">
   <a class="card-link" href="{{ .RelPermalink }}">
-    <div class="card-media">
-      {{ partial "img.html" (dict "name" .Params.image "w" 720 "h" 520 "alt" .Params.imageAlt "sizes" "(max-width: 700px) 100vw, 33vw") }}
-      <span class="chip chip--{{ $slug }}">{{ $r }}</span>
+    <div class="card-media duo duo--{{ $rub.color | default "blue" }}">
+      {{ partial "img.html" (dict "name" .Params.image "w" 720 "h" 500 "alt" .Params.imageAlt "sizes" "(max-width: 700px) 100vw, 33vw") }}
     </div>
     <div class="card-body">
-      <h3>{{ .Title }}</h3>
-      <p>{{ .Description | truncate 140 }}</p>
-      <span class="card-meta">{{ .ReadingTime }} min de lecture<span class="card-arrow" aria-hidden="true">→</span></span>
+      <span class="kicker kicker--{{ $rub.color | default "blue" }}">{{ $r }}</span>
+      <h3>{{ partial "fr.html" .Title }}</h3>
+      <p>{{ partial "fr.html" (.Description | truncate 140) }}</p>
+      <span class="card-meta">{{ .ReadingTime }} min de lecture<span class="card-arrow" aria-hidden="true">{{ partial "arrow.html" }}</span></span>
     </div>
   </a>
 </article>

@@ -1,23 +1,22 @@
 {{ define "bodyclass" }}is-page{{ end }}
 {{ define "main" }}
-<section class="list-hero list-hero--cream">
+<section class="list-hero">
   <div class="wrap list-hero-inner list-hero-inner--split">
     <div>
-      <p class="eyebrow">{{ .Params.eyebrow | default "Le média" }}</p>
-      <h1 class="list-title">{{ .Title }}</h1>
-      {{ with .Description }}<p class="list-lead">{{ . }}</p>{{ end }}
+      <p class="label">{{ .Params.eyebrow | default "Le média" }}</p>
+      <h1 class="list-title list-title--page">{{ .Title }}</h1>
+      {{ with .Description }}<p class="list-lead">{{ partial "fr.html" . }}</p>{{ end }}
     </div>
     {{ with .Params.image }}
     <div class="term-art" aria-hidden="true">
-      {{ partial "deco.html" (dict "name" "blob" "class" "ta-blob c-petrol") }}
-      <div class="ta-photo">{{ partial "img.html" (dict "name" . "w" 560 "h" 560 "alt" "") }}</div>
-      {{ partial "deco.html" (dict "name" "leaf" "class" "ta-leaf") }}
-      {{ partial "deco.html" (dict "name" "sparkle" "class" "ta-spark") }}
+      {{ partial "deco.html" (dict "name" "ring" "class" "ta-ring") }}
+      <div class="ta-photo duo duo--blue">{{ partial "img.html" (dict "name" . "w" 600 "h" 600 "alt" "") }}</div>
+      {{ partial "deco.html" (dict "name" "stripes" "class" "ta-stripes") }}
+      {{ partial "deco.html" (dict "name" "plus" "class" "ta-plus") }}
     </div>
     {{ end }}
   </div>
 </section>
-{{ partial "torn.html" (dict "variant" "a" "class" "torn--white torn--up") }}
-<section class="page-body"><div class="wrap narrow"><div class="prose">{{ .Content }}</div></div></section>
+<section class="page-body"><div class="wrap narrow"><div class="prose">{{ partial "fr.html" .Content | safeHTML }}</div></div></section>
 {{ partial "newsletter.html" . }}
 {{ end }}

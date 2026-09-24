@@ -5,19 +5,18 @@
 <section class="list-hero list-hero--{{ $rub.color }}">
   <div class="wrap list-hero-inner list-hero-inner--split">
     <div>
-      <p class="eyebrow">{{ $rub.kicker }}</p>
+      <p class="label">{{ $rub.kicker }}</p>
       <h1 class="list-title">{{ $rub.name }}</h1>
-      <p class="list-lead">{{ $rub.text }}</p>
+      <p class="list-lead">{{ partial "fr.html" $rub.text }}</p>
     </div>
     <div class="term-art" aria-hidden="true">
-      {{ partial "deco.html" (dict "name" "blob" "class" (printf "ta-blob c-%s" $rub.color)) }}
-      <div class="ta-photo">{{ partial "img.html" (dict "name" $rub.image "w" 560 "h" 560 "alt" "") }}</div>
-      {{ partial "deco.html" (dict "name" "branch" "class" "ta-branch") }}
-      {{ partial "deco.html" (dict "name" "sparkle" "class" "ta-spark") }}
+      {{ partial "deco.html" (dict "name" "ring" "class" "ta-ring") }}
+      <div class="ta-photo duo duo--{{ $rub.color }}">{{ partial "img.html" (dict "name" $rub.image "w" 600 "h" 600 "alt" "") }}</div>
+      {{ partial "sticker.html" (dict "text" (printf "%d<br>article%s" (len .Pages) (cond (gt (len .Pages) 1) "s" "")) "color" (cond (eq $rub.color "orange") "lime" "orange") "class" "ta-sticker") }}
+      {{ partial "deco.html" (dict "name" "plus" "class" "ta-plus") }}
     </div>
   </div>
 </section>
-{{ partial "torn.html" (dict "variant" "b" "class" "torn--cream torn--up") }}
 <section class="list-body">
   <div class="wrap">
     <div class="filters">

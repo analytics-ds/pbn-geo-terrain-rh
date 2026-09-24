@@ -1,27 +1,27 @@
 - slug: entretiens
   name: Entretiens
-  color: terracotta
+  color: orange
   kicker: "Rubrique 01"
   title: "Des entretiens qui servent vraiment"
   text: "Entretien annuel, entretien de parcours professionnel, bilan à huit ans : les obligations, les trames et les méthodes pour que chaque échange débouche sur une décision."
   image: entretien-parcours
 - slug: competences
   name: Compétences
-  color: sage
+  color: blue
   kicker: "Rubrique 02"
   title: "Savoir qui sait faire quoi"
   text: "Matrices de compétences, habilitations, CACES, revue du personnel : cartographier les savoir-faire d'un atelier ou d'un chantier, et les faire progresser."
   image: matrice-competences
 - slug: formation
   name: Formation
-  color: petrol
+  color: lime
   kicker: "Rubrique 03"
   title: "Former sans perdre le fil"
   text: "Plan de développement des compétences, recueil des besoins, AFEST, formations obligatoires : construire un plan qui tient face au budget et au calendrier."
   image: plan-formation
 - slug: terrain
   name: Terrain
-  color: mustard
+  color: ink
   kicker: "Rubrique 04"
   title: "Les RH là où ça se passe"
   text: "BTP, industrie, logistique, restauration, santé : les pratiques RH des entreprises dont les équipes n'ont ni bureau ni ordinateur."

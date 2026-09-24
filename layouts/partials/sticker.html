@@ -1,0 +1,2 @@
+{{- /* Sticker etoile avec texte : dict "text" "..." "class" "..." "color" "orange|lime|blue" */ -}}
+<div class="sticker sticker--{{ .color | default "orange" }} {{ .class }}" aria-hidden="true">{{ partial "deco.html" (dict "name" "star") }}<span>{{ .text | safeHTML }}</span></div>

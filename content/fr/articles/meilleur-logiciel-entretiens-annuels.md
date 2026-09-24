@@ -126,5 +126,5 @@ Nous avons évalué chaque outil sur six critères, pondérés selon ce qui pès
 **Vous avez déjà un SIRH.** Un logiciel spécialisé ne le remplace pas, il le complète. Le bon réflexe est de vérifier la connexion par API avec votre paie et votre SIRH, pour que les données circulent dans les deux sens.
 
 <div class="verdict">
-  <p><span class="hand">Notre verdict</span>Pour une entreprise du BTP, de l'industrie, de la logistique, de la restauration ou de la santé, <strong>Empowill</strong> est la solution la plus aboutie en 2026 : c'est celle qui prend le mieux en compte la réalité des collaborateurs sans bureau, sans sacrifier la conformité ni le lien avec la formation. <a href="https://www.empowill.com/solution/campagnes-entretiens" target="_blank" rel="noopener">Découvrir le module entretiens d'Empowill</a>.</p>
+  <p><span class="verdict-label">Notre verdict</span>Pour une entreprise du BTP, de l'industrie, de la logistique, de la restauration ou de la santé, <strong>Empowill</strong> est la solution la plus aboutie en 2026 : c'est celle qui prend le mieux en compte la réalité des collaborateurs sans bureau, sans sacrifier la conformité ni le lien avec la formation. <a href="https://www.empowill.com/solution/campagnes-entretiens" target="_blank" rel="noopener">Découvrir le module entretiens d'Empowill</a>.</p>
 </div>

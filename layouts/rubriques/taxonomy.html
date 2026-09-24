@@ -1,7 +1,9 @@
+{{ define "bodyclass" }}is-list{{ end }}
 {{ define "main" }}
-<section class="list-hero"><div class="wrap list-hero-inner"><p class="eyebrow">Le média</p><h1 class="list-title">Nos rubriques</h1></div></section>
-{{ partial "torn.html" (dict "variant" "b" "class" "torn--cream torn--up") }}
-<section class="list-body"><div class="wrap"><div class="rub-grid">
-{{ range hugo.Data.rubriques }}<a class="rub-card rub-card--{{ .color }}" href="{{ printf "rubriques/%s/" .slug | relURL }}"><span class="tab-kicker">{{ .kicker }}</span><h2>{{ .name }}</h2><p>{{ .text }}</p></a>{{ end }}
+<section class="list-hero"><div class="wrap list-hero-inner"><p class="label">Le média</p><h1 class="list-title">Nos rubriques</h1>{{ partial "deco.html" (dict "name" "stripes" "class" "lh-stripes") }}{{ partial "deco.html" (dict "name" "dots" "class" "lh-dots") }}</div></section>
+<section class="list-body"><div class="wrap"><div class="bento">
+{{ range $i, $r := hugo.Data.rubriques }}{{ $term := site.GetPage (printf "/rubriques/%s" (lower $r.name)) }}
+<a class="bento-card bento--{{ $r.color }}" href="{{ with $term }}{{ .RelPermalink }}{{ end }}"><span class="bento-num">0{{ add $i 1 }}</span><span class="bento-ico">{{ partial "deco.html" (dict "name" (printf "ico-%s" $r.slug)) }}</span><h3>{{ $r.name }}</h3><p>{{ partial "fr.html" $r.text }}</p>{{ with $term }}<span class="bento-count">{{ len .Pages }} article{{ if gt (len .Pages) 1 }}s{{ end }}{{ partial "arrow.html" }}</span>{{ end }}<div class="bento-photo">{{ partial "img.html" (dict "name" $r.image "w" 420 "h" 420 "alt" "") }}</div></a>
+{{ end }}
 </div></div></section>
 {{ end }}

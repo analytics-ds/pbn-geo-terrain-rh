@@ -2,172 +2,164 @@
 {{ define "main" }}
 {{ $articles := where site.RegularPages "Section" "articles" }}
 {{ $comparatif := site.GetPage "/articles/meilleur-logiciel-entretiens-annuels" }}
+{{ $featured := first 3 (where $articles "Params.featured" true) }}
 
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow">{{ site.Params.tagline }}</p>
-      <h1 class="hero-title">
-        <span>Entretiens<i class="p1">.</i></span>
-        <span>Compétences<i class="p2">.</i></span>
-        <span class="hero-last">Formation<i class="p3">.</i><a class="hero-pill" href="#rubriques" aria-label="Découvrir les rubriques"><svg viewBox="0 0 32 20" aria-hidden="true"><path d="M16 3v10M11 9l5 5 5-5M5 17h22M7 9L4 6M25 9l3-3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span>
-      </h1>
-      <p class="hero-lead">Le média des RH qui font tourner le terrain. Des méthodes concrètes pour les entreprises du BTP, de l'industrie, de la logistique, de la restauration et de la santé.</p>
+      <p class="label">{{ site.Params.tagline }}</p>
+      <h1 class="hero-title">Les RH qui font tourner le <mark>terrain</mark>.</h1>
+      <p class="hero-lead">Entretiens, compétences, formation&nbsp;: des méthodes concrètes pour les entreprises du BTP, de l'industrie, de la logistique, de la restauration et de la santé.</p>
       <div class="hero-actions">
-        {{ with $comparatif }}<a class="btn btn--petrol btn--lg" href="{{ .RelPermalink }}">Lire le comparatif 2026</a>{{ end }}
-        <a class="btn btn--ghost btn--lg" href="#rubriques">Explorer les rubriques</a>
+        {{ with $comparatif }}<a class="btn btn--orange btn--lg" href="{{ .RelPermalink }}">Lire le comparatif 2026{{ partial "arrow.html" }}</a>{{ end }}
+        <a class="btn btn--line btn--lg" href="#rubriques">Voir les rubriques</a>
       </div>
-      <div class="hero-mini" aria-hidden="true">
-        {{ partial "deco.html" (dict "name" "triangle" "class" "hm-tri") }}
-        {{ partial "deco.html" (dict "name" "branch" "class" "hm-branch") }}
-        <div class="hm-photo">{{ partial "img.html" (dict "name" "btp-chantier" "w" 360 "h" 360 "alt" "") }}</div>
-        {{ partial "deco.html" (dict "name" "arc" "class" "hm-arc") }}
-      </div>
+      <ul class="hero-topics" aria-label="Rubriques">
+        {{ range hugo.Data.rubriques }}<li><a class="topic topic--{{ .color }}" href="{{ printf "rubriques/%s/" .slug | relURL }}">{{ .name }}</a></li>{{ end }}
+      </ul>
     </div>
     <div class="hero-art" aria-hidden="true">
-      {{ partial "deco.html" (dict "name" "blob" "class" "ha-blob") }}
-      {{ partial "deco.html" (dict "name" "leaf" "class" "ha-leaf") }}
-      {{ partial "deco.html" (dict "name" "orbit" "class" "ha-orbit") }}
-      <div class="ha-photo">{{ partial "img.html" (dict "name" "hero-casques" "w" 900 "h" 1100 "alt" "" "eager" true "anchor" "Top") }}</div>
-      {{ partial "deco.html" (dict "name" "arc" "class" "ha-arc") }}
-      {{ partial "deco.html" (dict "name" "branch" "class" "ha-branch") }}
-      {{ partial "deco.html" (dict "name" "rays" "class" "ha-rays") }}
-      {{ partial "deco.html" (dict "name" "sparkle" "class" "ha-spark") }}
-      {{ partial "deco.html" (dict "name" "sparkle" "class" "ha-spark2") }}
+      <div class="ha-panel"></div>
+      {{ partial "deco.html" (dict "name" "quarter" "class" "ha-quarter") }}
+      <div class="ha-main duo duo--blue">{{ partial "img.html" (dict "name" "hero-casques" "w" 700 "h" 1040 "alt" "" "eager" true "anchor" "Top") }}</div>
+      <div class="ha-side duo duo--orange">{{ partial "img.html" (dict "name" "soudeur" "w" 420 "h" 420 "alt" "") }}</div>
+      {{ partial "sticker.html" (dict "text" (printf "%d guides<br>pratiques" (len $articles)) "color" "orange" "class" "ha-sticker") }}
+      {{ partial "deco.html" (dict "name" "stripes" "class" "ha-stripes") }}
+      {{ partial "deco.html" (dict "name" "dots" "class" "ha-dots") }}
+      {{ partial "deco.html" (dict "name" "plus" "class" "ha-plus") }}
+      <div class="ha-card">
+        <p class="ha-card-label">À savoir</p>
+        <p>Entretien de parcours professionnel&nbsp;: <strong>tous les 4 ans</strong>, bilan à 8 ans.</p>
+      </div>
     </div>
   </div>
-  <a class="hero-go" href="#une"><span>C'est parti !</span>{{ partial "deco.html" (dict "name" "arrow") }}</a>
 </section>
 
-<section class="une grain" id="une" data-carousel>
-  <div class="wrap une-grid">
-    <div class="une-stack">
-      <button class="round-btn round-btn--prev" type="button" aria-label="Article précédent" data-prev><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-      <div class="paper-stack">
-        {{ range $i, $p := first 3 (where $articles "Params.featured" true) }}
-        <a class="paper{{ if eq $i 0 }} is-active{{ end }}" href="{{ $p.RelPermalink }}" data-slide>
-          <span class="paper-num">0{{ add $i 1 }}<svg viewBox="0 0 40 10" aria-hidden="true"><path d="M3 3c8 7 26 7 34 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
-          <span class="paper-rub">{{ index $p.Params.rubriques 0 }}</span>
-          <span class="paper-title">{{ $p.Params.shortTitle | default $p.Title }}</span>
-        </a>
-        {{ end }}
-        <span class="paper-back paper-back--1"></span><span class="paper-back paper-back--2"></span>
-      </div>
-      <button class="round-btn round-btn--next" type="button" aria-label="Article suivant" data-next><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+<div class="tape" aria-hidden="true">
+  <div class="tape-track">
+    {{ range seq 2 }}<span>Entretiens</span><span>Compétences</span><span>Formation</span><span>BTP</span><span>Industrie</span><span>Logistique</span><span>Restauration</span><span>Santé</span><span>Habilitations</span><span>Plan de formation</span>{{ end }}
+  </div>
+</div>
+
+<section class="une blueprint">
+  <div class="wrap">
+    <div class="section-head">
+      <div><p class="label label--dark">À la une</p><h2 class="section-title">Les dossiers du moment</h2></div>
+      <a class="btn btn--lime" href="{{ "articles/" | relURL }}">Tous les articles{{ partial "arrow.html" }}</a>
     </div>
-    <div class="une-text">
-      <p class="eyebrow eyebrow--light">À la une</p>
-      {{ range $i, $p := first 3 (where $articles "Params.featured" true) }}
-      <div class="une-item{{ if eq $i 0 }} is-active{{ end }}" data-text>
-        <h2>{{ $p.Title }}</h2>
-        <p>{{ $p.Description }}</p>
-        <a class="btn btn--sage" href="{{ $p.RelPermalink }}">Lire l'article</a>
-      </div>
+    <div class="une-grid">
+      {{ range $i, $p := $featured }}
+      {{ $r := index $p.Params.rubriques 0 }}
+      <a class="une-card{{ if eq $i 0 }} une-card--big{{ end }}" href="{{ $p.RelPermalink }}">
+        <div class="une-media duo duo--{{ cond (eq $i 0) "blue" "orange" }}">{{ partial "img.html" (dict "name" $p.Params.image "w" (cond (eq $i 0) 960 520) "h" (cond (eq $i 0) 620 420) "alt" $p.Params.imageAlt) }}</div>
+        <div class="une-body">
+          <span class="une-kicker">{{ $r }} / {{ $p.ReadingTime }} min</span>
+          <h3>{{ partial "fr.html" $p.Title }}</h3>
+          {{ if eq $i 0 }}<p>{{ partial "fr.html" $p.Description }}</p>{{ end }}
+          <span class="une-more">Lire le dossier{{ partial "arrow.html" }}</span>
+        </div>
+      </a>
       {{ end }}
-      {{ partial "deco.html" (dict "name" "curl" "class" "une-curl") }}
     </div>
-  </div>
-</section>
-
-<section class="quote-band">
-  {{ partial "torn.html" (dict "variant" "a" "class" "torn--white torn--up") }}
-  <div class="tape tape--right">
-    {{ partial "deco.html" (dict "name" "burst") }}
-    <p><span class="hand">« Il n'est de richesse que d'hommes. »</span> <cite>Jean Bodin</cite></p>
   </div>
 </section>
 
 <section class="rubriques" id="rubriques">
   <div class="wrap">
-    <p class="eyebrow center">Nos rubriques</p>
-    <h2 class="section-title center">Tout ce qui fait avancer vos équipes</h2>
-    <div class="tabs" data-tabs>
+    <div class="section-head">
+      <div><p class="label">Nos rubriques</p><h2 class="section-title">Quatre portes d'entrée</h2></div>
+      <p class="section-intro">Chaque rubrique rassemble des guides pratiques, des décryptages réglementaires et des comparatifs d'outils.</p>
+    </div>
+    <div class="bento">
       {{ range $i, $r := hugo.Data.rubriques }}
-      {{ $term := site.GetPage (printf "/rubriques/%s" $r.slug) }}
-      <div class="tab tab--{{ $r.color }}{{ if eq $i 0 }} is-open{{ end }}" data-tab>
-        <button class="tab-label" type="button" aria-expanded="{{ if eq $i 0 }}true{{ else }}false{{ end }}"><span>{{ $r.name }}</span>{{ partial "deco.html" (dict "name" (printf "ico-%s" $r.slug)) }}</button>
-        <div class="tab-panel">
-          <div class="tab-art">
-            {{ partial "deco.html" (dict "name" "blob" "class" (printf "tab-blob c-%s" $r.color)) }}
-            <div class="tab-photo">{{ partial "img.html" (dict "name" $r.image "w" 520 "h" 520 "alt" "") }}</div>
-            {{ partial "deco.html" (dict "name" "sparkle" "class" "tab-spark") }}
-          </div>
-          <div class="tab-copy">
-            <p class="tab-kicker">{{ $r.kicker }}</p>
-            <h3>{{ $r.title }}</h3>
-            <p>{{ $r.text }}</p>
-            {{ with $term }}<a class="btn btn--petrol" href="{{ .RelPermalink }}">Voir les {{ len .Pages }} article{{ if gt (len .Pages) 1 }}s{{ end }}</a>{{ end }}
-          </div>
-        </div>
-      </div>
+      {{ $term := site.GetPage (printf "/rubriques/%s" (lower $r.name)) }}
+      <a class="bento-card bento--{{ $r.color }}" href="{{ with $term }}{{ .RelPermalink }}{{ end }}">
+        <span class="bento-num">0{{ add $i 1 }}</span>
+        <span class="bento-ico">{{ partial "deco.html" (dict "name" (printf "ico-%s" $r.slug)) }}</span>
+        <h3>{{ $r.name }}</h3>
+        <p>{{ partial "fr.html" $r.text }}</p>
+        {{ with $term }}<span class="bento-count">{{ len .Pages }} article{{ if gt (len .Pages) 1 }}s{{ end }}{{ partial "arrow.html" }}</span>{{ end }}
+        <div class="bento-photo">{{ partial "img.html" (dict "name" $r.image "w" 420 "h" 420 "alt" "") }}</div>
+      </a>
       {{ end }}
     </div>
   </div>
 </section>
 
 <section class="latest">
-  {{ partial "torn.html" (dict "variant" "b" "class" "torn--cream torn--up") }}
-  <div class="latest-body">
-    <div class="wrap">
-      <div class="section-head">
-        <div><p class="eyebrow">À lire</p><h2 class="section-title">Les derniers guides</h2></div>
-        <a class="btn btn--ghost" href="{{ "articles/" | relURL }}">Tous les articles</a>
-      </div>
-      <div class="cards">
-        {{ range first 6 $articles.ByDate.Reverse }}{{ partial "card.html" . }}{{ end }}
-      </div>
+  <div class="wrap">
+    <div class="section-head">
+      <div><p class="label">À lire</p><h2 class="section-title">Les derniers guides</h2></div>
+      <a class="btn btn--line" href="{{ "articles/" | relURL }}">Tous les articles</a>
+    </div>
+    <div class="cards">
+      {{ range first 6 $articles.ByDate.Reverse }}{{ partial "card.html" . }}{{ end }}
     </div>
   </div>
-  {{ partial "torn.html" (dict "variant" "a" "class" "torn--cream") }}
 </section>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    {{ range seq 4 }}<span>#entretiens#compétences#formation#terrain#btp#industrie#logistique#restauration#santé</span>{{ end }}
+<section class="quote">
+  <div class="wrap quote-inner">
+    {{ partial "deco.html" (dict "name" "quote" "class" "quote-glyph") }}
+    <blockquote>
+      <p>Il n'est de <mark>richesse</mark> que d'hommes.</p>
+      <cite>D'après Jean Bodin (1576)</cite>
+    </blockquote>
+    {{ partial "deco.html" (dict "name" "zigzag" "class" "quote-zig") }}
   </div>
-</div>
+</section>
 
-<section class="parti">
+<section class="methode">
   <div class="wrap">
-    <p class="eyebrow center">Notre parti pris</p>
-    <h2 class="section-title center">Penser terrain, écrire concret</h2>
-    <div class="duo">
-      <div class="duo-card">
-        <h3>Un média qui part du terrain</h3>
-        <p>Chefs d'équipe sur un chantier, caristes, cuisiniers, soignants : nos sujets partent des métiers où l'on ne travaille pas derrière un écran, et des <span class="hl-mustard">RH qui les accompagnent au quotidien</span>.</p>
+    <div class="section-head">
+      <div><p class="label">Notre méthode</p><h2 class="section-title">Comment on travaille</h2></div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3>Partir des métiers</h3>
+        <p>Chefs d'équipe, caristes, cuisiniers, soignants&nbsp;: chaque sujet part d'un métier où l'on ne travaille pas derrière un écran, et des RH qui l'accompagnent.</p>
       </div>
-      <div class="duo-card">
-        <h3>Des méthodes, pas du jargon</h3>
-        <p>Chaque article répond à une question précise, avec <span class="hl-terracotta">le cadre légal à jour</span>, des exemples sectoriels et des outils comparés sans détour. Lisible en dix minutes, utilisable le lendemain.</p>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3>Citer le cadre légal</h3>
+        <p>Textes de référence, dates d'entrée en vigueur, obligations et bonnes pratiques bien séparées. Chaque article est daté et mis à jour.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3>Comparer sans détour</h3>
+        <p>Nos comparatifs publient leurs critères. Les outils y sont évalués au prisme des entreprises terrain, pas d'un bureau en open space.</p>
       </div>
     </div>
-    <div class="stats">
-      <div class="stat"><strong data-count="{{ len $articles }}">{{ len $articles }}</strong><span>guides pratiques</span></div>
-      <div class="stat"><strong data-count="4">4</strong><span>rubriques</span></div>
-      <div class="stat"><strong data-count="5">5</strong><span>secteurs terrain</span></div>
+    <div class="stats blueprint">
+      <div class="stat"><strong>{{ len $articles }}</strong><span>guides pratiques</span></div>
+      <div class="stat"><strong>4</strong><span>rubriques</span></div>
+      <div class="stat"><strong>5</strong><span>secteurs terrain</span></div>
     </div>
   </div>
 </section>
 
 {{ with $comparatif }}
 <section class="compare-cta">
-  <div class="wrap compare-grid">
-    <div class="compare-copy">
-      <p class="eyebrow">Le comparatif 2026</p>
-      <h2 class="section-title">Quel logiciel pour vos entretiens annuels&nbsp;?</h2>
-      <p>Nous avons passé en revue sept solutions du marché français au prisme des entreprises terrain : accès sans ordinateur, suivi des habilitations, lien avec la formation.</p>
-      <ol class="podium">
-        {{ range $i, $s := first 3 .Params.podium }}
-        <li class="podium-item{{ if eq $i 0 }} is-first{{ end }}"><span class="podium-rank">{{ add $i 1 }}</span><span class="podium-name">{{ $s.name }}</span><span class="podium-note">{{ $s.note }}</span></li>
-        {{ end }}
-      </ol>
-      <a class="btn btn--petrol btn--lg" href="{{ .RelPermalink }}">Lire le comparatif complet</a>
-    </div>
-    <div class="compare-art" aria-hidden="true">
-      {{ partial "deco.html" (dict "name" "blob" "class" "ca-blob") }}
-      <div class="ca-photo">{{ partial "img.html" (dict "name" .Params.image "w" 640 "h" 760 "alt" "") }}</div>
-      {{ partial "deco.html" (dict "name" "leaf" "class" "ca-leaf") }}
-      {{ partial "deco.html" (dict "name" "orbit" "class" "ca-orbit") }}
+  <div class="wrap">
+    <div class="compare-grid">
+      <div class="compare-copy">
+        <p class="label">Le comparatif 2026</p>
+        <h2 class="section-title">Quel logiciel pour vos entretiens annuels&nbsp;?</h2>
+        <p class="compare-lead">Sept solutions du marché français passées en revue au prisme des entreprises terrain&nbsp;: accès sans ordinateur, suivi des habilitations, lien avec la formation.</p>
+        <ol class="podium">
+          {{ range $i, $s := first 3 .Params.podium }}
+          <li class="podium-item{{ if eq $i 0 }} is-first{{ end }}"><span class="podium-rank">{{ add $i 1 }}</span><span class="podium-name">{{ $s.name }}</span><span class="podium-note">{{ $s.note }}</span></li>
+          {{ end }}
+        </ol>
+        <a class="btn btn--orange btn--lg" href="{{ .RelPermalink }}">Lire le comparatif complet{{ partial "arrow.html" }}</a>
+      </div>
+      <div class="compare-art" aria-hidden="true">
+        {{ partial "deco.html" (dict "name" "dots" "class" "ca-dots") }}
+        <div class="ca-photo duo duo--blue">{{ partial "img.html" (dict "name" .Params.image "w" 640 "h" 760 "alt" "") }}</div>
+        {{ partial "sticker.html" (dict "text" "N°1<br>2026" "color" "lime" "class" "ca-sticker") }}
+        {{ partial "deco.html" (dict "name" "ring" "class" "ca-ring") }}
+      </div>
     </div>
   </div>
 </section>

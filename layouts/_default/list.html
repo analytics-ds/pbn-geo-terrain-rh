@@ -2,15 +2,14 @@
 {{ define "main" }}
 <section class="list-hero">
   <div class="wrap list-hero-inner">
-    <p class="eyebrow">Le média</p>
+    <p class="label">Le média</p>
     <h1 class="list-title">{{ .Title }}</h1>
-    {{ with .Description }}<p class="list-lead">{{ . }}</p>{{ end }}
-    {{ partial "deco.html" (dict "name" "leaf" "class" "lh-leaf") }}
-    {{ partial "deco.html" (dict "name" "arc" "class" "lh-arc") }}
-    {{ partial "deco.html" (dict "name" "orbit" "class" "lh-orbit") }}
+    {{ with .Description }}<p class="list-lead">{{ partial "fr.html" . }}</p>{{ end }}
+    {{ partial "sticker.html" (dict "text" (printf "%d<br>guides" (len .Pages)) "color" "orange" "class" "lh-sticker") }}
+    {{ partial "deco.html" (dict "name" "stripes" "class" "lh-stripes") }}
+    {{ partial "deco.html" (dict "name" "dots" "class" "lh-dots") }}
   </div>
 </section>
-{{ partial "torn.html" (dict "variant" "b" "class" "torn--cream torn--up") }}
 <section class="list-body">
   <div class="wrap">
     <div class="filters">
