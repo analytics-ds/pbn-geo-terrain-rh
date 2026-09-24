@@ -1,0 +1,15 @@
+public/
+resources/
+.hugo_build.lock
+.DS_Store
+node_modules/
+.env
+*.log
+.playwright-cli/
+
+# Instructions internes, gardees en local (elles nomment le reseau et l'agence).
+# Pas de routine sur ce blog a ce stade : rien ne les lit depuis le depot.
+.claude/
+CLAUDE.md
+AGENTS.md
+MEMORY.md

@@ -1,0 +1,8 @@
+{{- /* Image traitee par Hugo : dict "name" "hero-casques" "w" 800 "h" 1000 "alt" "..." "class" "..." "eager" true */ -}}
+{{- with resources.Get (printf "images/%s.jpg" .name) -}}
+{{- $w := $.w | default 800 -}}{{- $h := $.h | default 0 -}}
+{{- $a := "" -}}{{- $b := "" -}}
+{{- if $h -}}{{- $a = .Fill (printf "%dx%d webp %s" $w $h ($.anchor | default "Smart")) -}}{{- $b = .Fill (printf "%dx%d webp %s" (div $w 2) (div $h 2) ($.anchor | default "Smart")) -}}
+{{- else -}}{{- $a = .Resize (printf "%dx webp" $w) -}}{{- $b = .Resize (printf "%dx webp" (div $w 2)) -}}{{- end -}}
+<img src="{{ $a.RelPermalink }}" srcset="{{ $b.RelPermalink }} {{ $b.Width }}w, {{ $a.RelPermalink }} {{ $a.Width }}w" sizes="{{ $.sizes | default "(max-width: 700px) 100vw, 50vw" }}" width="{{ $a.Width }}" height="{{ $a.Height }}" alt="{{ $.alt | default "" }}"{{ with $.class }} class="{{ . }}"{{ end }}{{ if not $.eager }} loading="lazy"{{ end }} decoding="async">
+{{- end -}}

@@ -1,0 +1,15 @@
+{{- $r := index (.Params.rubriques | default slice) 0 -}}
+{{- $slug := urlize $r -}}
+<article class="card card--{{ $slug }}">
+  <a class="card-link" href="{{ .RelPermalink }}">
+    <div class="card-media">
+      {{ partial "img.html" (dict "name" .Params.image "w" 720 "h" 520 "alt" .Params.imageAlt "sizes" "(max-width: 700px) 100vw, 33vw") }}
+      <span class="chip chip--{{ $slug }}">{{ $r }}</span>
+    </div>
+    <div class="card-body">
+      <h3>{{ .Title }}</h3>
+      <p>{{ .Description | truncate 140 }}</p>
+      <span class="card-meta">{{ .ReadingTime }} min de lecture<span class="card-arrow" aria-hidden="true">→</span></span>
+    </div>
+  </a>
+</article>

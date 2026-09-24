@@ -1,0 +1,75 @@
+{{ define "bodyclass" }}is-post{{ end }}
+{{ define "main" }}
+{{ $r := index (.Params.rubriques | default (slice "Terrain")) 0 }}{{ $slug := urlize $r }}
+{{ $rub := index (where hugo.Data.rubriques "slug" $slug) 0 }}
+<article class="post">
+  <header class="post-hero">
+    <div class="wrap post-hero-grid">
+      <div class="post-head">
+        <nav class="crumbs" aria-label="Fil d'Ariane"><a href="{{ "/" | relURL }}">Accueil</a><span aria-hidden="true">/</span><a href="{{ printf "rubriques/%s/" $slug | relURL }}">{{ $r }}</a></nav>
+        <span class="chip chip--{{ $slug }}">{{ $r }}</span>
+        <h1>{{ .Title }}</h1>
+        <p class="post-lead">{{ .Description }}</p>
+        <div class="post-meta">
+          <span class="by">{{ partial "logo.html" . }}La rédaction {{ site.Title }}</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>{{ .Date | time.Format ":date_long" }}</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>{{ .ReadingTime }} min de lecture</span>
+        </div>
+      </div>
+      <div class="post-art" aria-hidden="true">
+        {{ partial "deco.html" (dict "name" "blob" "class" (printf "pa-blob c-%s" ($rub.color | default "sage"))) }}
+        <div class="pa-photo">{{ partial "img.html" (dict "name" .Params.image "w" 720 "h" 860 "alt" .Params.imageAlt "eager" true) }}</div>
+        {{ partial "deco.html" (dict "name" "branch" "class" "pa-branch") }}
+        {{ partial "deco.html" (dict "name" "arc" "class" "pa-arc") }}
+        {{ partial "deco.html" (dict "name" "sparkle" "class" "pa-spark") }}
+      </div>
+    </div>
+  </header>
+  {{ partial "torn.html" (dict "variant" "a" "class" "torn--white torn--up") }}
+  <div class="post-wrap">
+    <div class="wrap post-layout">
+      <aside class="toc">
+        <div class="toc-inner">
+          <p class="toc-title">Au sommaire</p>
+          {{ .TableOfContents }}
+          <a class="toc-cta" href="#lettre">{{ partial "deco.html" (dict "name" "cup") }}<span>Recevoir la lettre du terrain</span></a>
+        </div>
+      </aside>
+      <div class="post-body">
+        {{ with .Params.essentiel }}
+        <div class="essentiel">
+          <p class="essentiel-title hand">L'essentiel à retenir</p>
+          <ul>{{ range . }}<li>{{ . | markdownify }}</li>{{ end }}</ul>
+        </div>
+        {{ end }}
+        <div class="prose">{{ .Content }}</div>
+        {{ with .Params.faq }}
+        <section class="faq">
+          <h2 id="faq">Questions fréquentes</h2>
+          {{ range . }}<details><summary>{{ .question }}</summary><p>{{ .answer }}</p></details>{{ end }}
+        </section>
+        {{ end }}
+        <div class="author-box">
+          <div class="author-mark">{{ partial "logo.html" . }}</div>
+          <div><p class="author-name">La rédaction {{ site.Title }}</p><p>Une équipe éditoriale spécialisée dans les ressources humaines des entreprises de terrain. Nos articles sont relus et mis à jour à chaque évolution réglementaire.</p></div>
+        </div>
+        {{ with index hugo.Data.credits .Params.image }}<p class="photo-credit">Photo : <a href="{{ .url }}" rel="nofollow noopener" target="_blank">{{ .photographer }} sur Pexels</a></p>{{ end }}
+      </div>
+    </div>
+  </div>
+  {{ $related := .Site.RegularPages.Related . | first 3 }}
+  {{ with $related }}
+  <section class="related">
+    {{ partial "torn.html" (dict "variant" "b" "class" "torn--cream torn--up") }}
+    <div class="related-body">
+      <div class="wrap">
+        <p class="eyebrow">Pour aller plus loin</p>
+        <h2 class="section-title">À lire aussi</h2>
+        <div class="cards">{{ range . }}{{ partial "card.html" . }}{{ end }}</div>
+      </div>
+    </div>
+  </section>
+  {{ end }}
+</article>
+{{ partial "newsletter.html" . }}
+{{ end }}

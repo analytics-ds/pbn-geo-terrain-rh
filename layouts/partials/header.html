@@ -1,0 +1,25 @@
+<header class="site-header" data-header>
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ "/" | relURL }}" aria-label="{{ .Site.Title }}, accueil">
+      {{ partial "logo.html" . }}
+      <span class="brand-word">terrain<em>rh</em></span>
+    </a>
+    <nav class="main-nav" id="nav" aria-label="Navigation principale">
+      <ul>
+        {{ $current := . }}
+        {{ range .Site.Menus.main }}
+        <li><a href="{{ .URL }}"{{ if or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }} aria-current="page"{{ end }}>{{ .Name }}{{ if ne .Name "Le média" }}<svg class="caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>{{ end }}</a></li>
+        {{ end }}
+      </ul>
+      <div class="nav-ctas nav-ctas--mobile">
+        {{ with site.GetPage "/articles/meilleur-logiciel-entretiens-annuels" }}<a class="btn btn--mustard" href="{{ .RelPermalink }}">Le comparatif 2026</a>{{ end }}
+        <a class="btn btn--petrol" href="#lettre">S'abonner à la lettre</a>
+      </div>
+    </nav>
+    <div class="nav-ctas">
+      <a class="btn btn--petrol" href="#lettre">S'abonner</a>
+      {{ with site.GetPage "/articles/meilleur-logiciel-entretiens-annuels" }}<a class="btn btn--mustard" href="{{ .RelPermalink }}">Le comparatif 2026</a>{{ end }}
+    </div>
+    <button class="burger" type="button" aria-controls="nav" aria-expanded="false" data-burger><span></span><span></span><span class="sr">Menu</span></button>
+  </div>
+</header>

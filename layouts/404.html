@@ -1,0 +1,9 @@
+{{ define "main" }}
+<section class="list-hero lost"><div class="wrap list-hero-inner">
+  <p class="eyebrow">Erreur 404</p>
+  <h1 class="list-title">Cette page est partie sur un autre chantier.</h1>
+  <p class="list-lead">Le lien est peut-être ancien, ou l'adresse contient une faute de frappe.</p>
+  <p><a class="btn btn--petrol btn--lg" href="{{ "/" | relURL }}">Retour à l'accueil</a></p>
+  {{ partial "deco.html" (dict "name" "leaf" "class" "lh-leaf") }}{{ partial "deco.html" (dict "name" "arc" "class" "lh-arc") }}
+</div></section>
+{{ end }}

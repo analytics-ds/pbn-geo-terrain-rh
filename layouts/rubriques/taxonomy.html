@@ -1,0 +1,7 @@
+{{ define "main" }}
+<section class="list-hero"><div class="wrap list-hero-inner"><p class="eyebrow">Le média</p><h1 class="list-title">Nos rubriques</h1></div></section>
+{{ partial "torn.html" (dict "variant" "b" "class" "torn--cream torn--up") }}
+<section class="list-body"><div class="wrap"><div class="rub-grid">
+{{ range hugo.Data.rubriques }}<a class="rub-card rub-card--{{ .color }}" href="{{ printf "rubriques/%s/" .slug | relURL }}"><span class="tab-kicker">{{ .kicker }}</span><h2>{{ .name }}</h2><p>{{ .text }}</p></a>{{ end }}
+</div></div></section>
+{{ end }}

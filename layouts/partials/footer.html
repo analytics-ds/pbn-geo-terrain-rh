@@ -1,0 +1,36 @@
+<footer class="site-footer">
+  {{ partial "torn.html" (dict "variant" "b" "class" "torn--ink torn--up") }}
+  <div class="footer-body grain">
+    <div class="wrap">
+      <div class="footer-fun">
+        <div class="fun"><span class="fun-ico">{{ partial "deco.html" (dict "name" "cup") }}</span><strong>{{ len (where site.RegularPages "Section" "articles") }}</strong><span>guides pratiques</span></div>
+        <div class="fun"><span class="fun-ico">{{ partial "deco.html" (dict "name" "helmet") }}</span><strong>5</strong><span>secteurs terrain</span></div>
+        <div class="fun"><span class="fun-ico">{{ partial "deco.html" (dict "name" "smile") }}</span><strong>0</strong><span>jargon inutile</span></div>
+      </div>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand brand--light" href="{{ "/" | relURL }}">{{ partial "logo.html" . }}<span class="brand-word">terrain<em>rh</em></span></a>
+          <p>{{ .Site.Params.description }}</p>
+        </div>
+        <div>
+          <p class="footer-title">Rubriques</p>
+          <ul>{{ range hugo.Data.rubriques }}<li><a href="{{ printf "rubriques/%s/" .slug | relURL }}">{{ .name }}</a></li>{{ end }}</ul>
+        </div>
+        <div>
+          <p class="footer-title">Le média</p>
+          <ul>
+            <li><a href="{{ "a-propos/" | relURL }}">Qui sommes-nous</a></li>
+            <li><a href="{{ "articles/" | relURL }}">Tous les articles</a></li>
+            <li><a href="{{ "index.xml" | relURL }}">Flux RSS</a></li>
+            <li><a href="{{ "llms.txt" | relURL }}">llms.txt</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-title">Les secteurs</p>
+          <ul class="footer-tags"><li>BTP</li><li>Industrie</li><li>Logistique</li><li>Restauration</li><li>Santé</li></ul>
+        </div>
+      </div>
+      <p class="footer-legal">© {{ now.Year }} {{ .Site.Title }}. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>

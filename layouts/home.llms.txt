@@ -1,0 +1,13 @@
+# {{ site.Title }}
+
+> {{ site.Params.description }}
+
+## Articles
+{{ range (where site.RegularPages "Section" "articles").ByDate.Reverse }}
+- [{{ .Title }}]({{ .Permalink }}) : {{ .Description }}
+{{- end }}
+
+## Rubriques
+{{ range hugo.Data.rubriques }}
+- [{{ .name }}]({{ printf "rubriques/%s/" .slug | absURL }}) : {{ .text }}
+{{- end }}

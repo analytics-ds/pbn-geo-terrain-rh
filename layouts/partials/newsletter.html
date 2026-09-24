@@ -1,0 +1,18 @@
+<section class="letter" id="lettre">
+  {{ partial "torn.html" (dict "variant" "a" "class" "torn--sage torn--up") }}
+  <div class="letter-body">
+    <div class="wrap letter-grid">
+      <div>
+        <p class="eyebrow eyebrow--ink">La lettre du terrain</p>
+        <h2 class="section-title">Un guide RH par mois, directement dans votre boîte</h2>
+      </div>
+      <form class="letter-form" data-letter>
+        <label class="sr" for="email">Votre adresse e-mail</label>
+        <input id="email" type="email" placeholder="prenom.nom@entreprise.fr" required>
+        <button class="btn btn--ink" type="submit">Je m'abonne</button>
+        <p class="letter-note hand">Un mail par mois, promis.{{ partial "deco.html" (dict "name" "curl" "class" "letter-curl") }}</p>
+        <p class="letter-ok" hidden>Merci, c'est noté&nbsp;!</p>
+      </form>
+    </div>
+  </div>
+</section>

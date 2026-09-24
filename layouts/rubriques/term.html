@@ -1,0 +1,31 @@
+{{ define "bodyclass" }}is-list{{ end }}
+{{ define "main" }}
+{{ $slug := .Data.Term | urlize }}
+{{ $rub := index (where hugo.Data.rubriques "slug" $slug) 0 }}
+<section class="list-hero list-hero--{{ $rub.color }}">
+  <div class="wrap list-hero-inner list-hero-inner--split">
+    <div>
+      <p class="eyebrow">{{ $rub.kicker }}</p>
+      <h1 class="list-title">{{ $rub.name }}</h1>
+      <p class="list-lead">{{ $rub.text }}</p>
+    </div>
+    <div class="term-art" aria-hidden="true">
+      {{ partial "deco.html" (dict "name" "blob" "class" (printf "ta-blob c-%s" $rub.color)) }}
+      <div class="ta-photo">{{ partial "img.html" (dict "name" $rub.image "w" 560 "h" 560 "alt" "") }}</div>
+      {{ partial "deco.html" (dict "name" "branch" "class" "ta-branch") }}
+      {{ partial "deco.html" (dict "name" "sparkle" "class" "ta-spark") }}
+    </div>
+  </div>
+</section>
+{{ partial "torn.html" (dict "variant" "b" "class" "torn--cream torn--up") }}
+<section class="list-body">
+  <div class="wrap">
+    <div class="filters">
+      <a class="filter" href="{{ "articles/" | relURL }}">Tout</a>
+      {{ range hugo.Data.rubriques }}<a class="filter filter--{{ .color }}{{ if eq .slug $slug }} is-on{{ end }}" href="{{ printf "rubriques/%s/" .slug | relURL }}">{{ .name }}</a>{{ end }}
+    </div>
+    <div class="cards">{{ range .Pages.ByDate.Reverse }}{{ partial "card.html" . }}{{ end }}</div>
+  </div>
+</section>
+{{ partial "newsletter.html" . }}
+{{ end }}

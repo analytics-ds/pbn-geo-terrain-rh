@@ -1,0 +1,24 @@
+{{ define "bodyclass" }}is-list{{ end }}
+{{ define "main" }}
+<section class="list-hero">
+  <div class="wrap list-hero-inner">
+    <p class="eyebrow">Le média</p>
+    <h1 class="list-title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="list-lead">{{ . }}</p>{{ end }}
+    {{ partial "deco.html" (dict "name" "leaf" "class" "lh-leaf") }}
+    {{ partial "deco.html" (dict "name" "arc" "class" "lh-arc") }}
+    {{ partial "deco.html" (dict "name" "orbit" "class" "lh-orbit") }}
+  </div>
+</section>
+{{ partial "torn.html" (dict "variant" "b" "class" "torn--cream torn--up") }}
+<section class="list-body">
+  <div class="wrap">
+    <div class="filters">
+      <a class="filter is-on" href="{{ "articles/" | relURL }}">Tout</a>
+      {{ range hugo.Data.rubriques }}<a class="filter filter--{{ .color }}" href="{{ printf "rubriques/%s/" .slug | relURL }}">{{ .name }}</a>{{ end }}
+    </div>
+    <div class="cards">{{ range .Pages.ByDate.Reverse }}{{ partial "card.html" . }}{{ end }}</div>
+  </div>
+</section>
+{{ partial "newsletter.html" . }}
+{{ end }}

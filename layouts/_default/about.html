@@ -1,0 +1,23 @@
+{{ define "bodyclass" }}is-page{{ end }}
+{{ define "main" }}
+<section class="list-hero list-hero--cream">
+  <div class="wrap list-hero-inner list-hero-inner--split">
+    <div>
+      <p class="eyebrow">{{ .Params.eyebrow | default "Le média" }}</p>
+      <h1 class="list-title">{{ .Title }}</h1>
+      {{ with .Description }}<p class="list-lead">{{ . }}</p>{{ end }}
+    </div>
+    {{ with .Params.image }}
+    <div class="term-art" aria-hidden="true">
+      {{ partial "deco.html" (dict "name" "blob" "class" "ta-blob c-petrol") }}
+      <div class="ta-photo">{{ partial "img.html" (dict "name" . "w" 560 "h" 560 "alt" "") }}</div>
+      {{ partial "deco.html" (dict "name" "leaf" "class" "ta-leaf") }}
+      {{ partial "deco.html" (dict "name" "sparkle" "class" "ta-spark") }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ partial "torn.html" (dict "variant" "a" "class" "torn--white torn--up") }}
+<section class="page-body"><div class="wrap narrow"><div class="prose">{{ .Content }}</div></div></section>
+{{ partial "newsletter.html" . }}
+{{ end }}

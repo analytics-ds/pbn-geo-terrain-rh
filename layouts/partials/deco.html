@@ -1,0 +1,38 @@
+{{- $n := .name -}}{{- $c := .class | default "" -}}
+{{- if eq $n "leaf" -}}
+<svg class="deco deco-leaf {{ $c }}" viewBox="0 0 140 190" aria-hidden="true"><path d="M70 186C28 160 4 112 14 66 22 30 48 8 70 2c22 6 48 28 56 64 10 46-14 94-56 120z" fill="var(--sage)"/><path d="M70 182V14M70 52L30 34M70 52l40-18M70 84L20 70M70 84l50-14M70 116l-44-8M70 116l44-8M70 146l-30-4M70 146l30-4" stroke="var(--sage-deep)" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M26 70c-6 10-8 22-6 32M114 70c6 10 8 22 6 32" stroke="var(--cream)" stroke-width="5" stroke-linecap="round" fill="none" opacity=".55"/></svg>
+{{- else if eq $n "branch" -}}
+<svg class="deco deco-branch {{ $c }}" viewBox="0 0 160 220" aria-hidden="true"><path d="M84 216C80 160 86 100 112 20" stroke="var(--sage-deep)" stroke-width="3" fill="none" stroke-linecap="round"/><g fill="var(--sage)"><ellipse cx="62" cy="170" rx="30" ry="11" transform="rotate(-28 62 170)"/><ellipse cx="112" cy="150" rx="30" ry="11" transform="rotate(24 112 150)"/><ellipse cx="68" cy="116" rx="28" ry="10" transform="rotate(-34 68 116)"/><ellipse cx="120" cy="96" rx="27" ry="10" transform="rotate(28 120 96)"/><ellipse cx="82" cy="66" rx="24" ry="9" transform="rotate(-40 82 66)"/><ellipse cx="130" cy="44" rx="22" ry="8" transform="rotate(30 130 44)"/></g><g fill="var(--terracotta)"><circle cx="100" cy="128" r="4"/><circle cx="92" cy="86" r="3.4"/><circle cx="108" cy="54" r="3"/></g></svg>
+{{- else if eq $n "arc" -}}
+<svg class="deco deco-arc {{ $c }}" viewBox="0 0 120 70" aria-hidden="true"><path d="M4 66a56 56 0 0 1 112 0H86a26 26 0 0 0-52 0z" fill="var(--mustard)"/></svg>
+{{- else if eq $n "orbit" -}}
+<svg class="deco deco-orbit {{ $c }}" viewBox="0 0 400 160" aria-hidden="true"><ellipse cx="200" cy="80" rx="194" ry="54" transform="rotate(-10 200 80)" fill="none" stroke="var(--terracotta)" stroke-width="2.2"/><circle cx="360" cy="46" r="9" fill="var(--terracotta)"/></svg>
+{{- else if eq $n "blob" -}}
+<svg class="deco deco-blob {{ $c }}" viewBox="0 0 200 200" aria-hidden="true"><path d="M154 36c26 22 38 58 30 92s-38 64-76 68-72-18-88-50S12 74 34 48 128 14 154 36z" fill="currentColor"/></svg>
+{{- else if eq $n "triangle" -}}
+<svg class="deco deco-tri {{ $c }}" viewBox="0 0 120 110" aria-hidden="true"><path d="M60 4l56 102H4z" fill="currentColor"/></svg>
+{{- else if eq $n "sparkle" -}}
+<svg class="deco deco-sparkle {{ $c }}" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 2v12M20 26v12M2 20h12M26 20h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+{{- else if eq $n "rays" -}}
+<svg class="deco deco-rays {{ $c }}" viewBox="0 0 60 60" aria-hidden="true"><path d="M10 50L26 34M20 10l8 18M50 22L34 30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+{{- else if eq $n "arrow" -}}
+<svg class="deco deco-arrow {{ $c }}" viewBox="0 0 40 120" aria-hidden="true"><path d="M20 4c-2 30 3 70 0 108M6 96l14 18 14-18" fill="none" stroke="var(--mustard)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{{- else if eq $n "curl" -}}
+<svg class="deco deco-curl {{ $c }}" viewBox="0 0 60 50" aria-hidden="true"><path d="M8 6c4 18 14 30 34 34M34 32l9 8-11 4" fill="none" stroke="var(--mustard)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{{- else if eq $n "burst" -}}
+<svg class="deco deco-burst {{ $c }}" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 2l9 14 16-6 2 17 17 3-7 15 12 12-15 8 4 17-17-1-5 16-14-10-14 10-5-16-17 1 4-17-15-8 12-12-7-15 17-3 2-17 16 6z" fill="var(--terracotta)"/><text x="50" y="72" text-anchor="middle" font-family="Georgia, serif" font-size="58" font-weight="700" fill="#fff">“</text></svg>
+{{- else if eq $n "cup" -}}
+<svg class="deco {{ $c }}" viewBox="0 0 80 80" aria-hidden="true"><ellipse cx="38" cy="70" rx="30" ry="7" fill="var(--mustard)"/><path d="M16 30h44v22c0 10-9 18-22 18S16 62 16 52z" fill="var(--sage)"/><path d="M60 36c10 0 12 14 0 16" fill="none" stroke="var(--sage)" stroke-width="5"/><path d="M32 8c-4 6 4 10 0 16M42 4c-4 6 4 10 0 18" fill="none" stroke="var(--mustard)" stroke-width="3" stroke-linecap="round"/></svg>
+{{- else if eq $n "helmet" -}}
+<svg class="deco {{ $c }}" viewBox="0 0 80 80" aria-hidden="true"><path d="M14 52c0-16 12-30 26-30s26 14 26 30z" fill="var(--mustard)"/><rect x="8" y="50" width="64" height="9" rx="4.5" fill="var(--terracotta)"/><path d="M40 22v14" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".7"/></svg>
+{{- else if eq $n "smile" -}}
+<svg class="deco {{ $c }}" viewBox="0 0 80 80" aria-hidden="true"><circle cx="44" cy="38" r="26" fill="var(--sage)"/><circle cx="18" cy="52" r="10" fill="var(--mustard)"/><path d="M34 34v2M54 34v2" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M33 46c6 6 16 6 22 0" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/></svg>
+{{- else if eq $n "ico-entretiens" -}}
+<svg class="ico {{ $c }}" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h11a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M19 9h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-4-3h-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+{{- else if eq $n "ico-competences" -}}
+<svg class="ico {{ $c }}" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="13" r="8" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="11" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M11 13l9-9M16 4h4v4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{{- else if eq $n "ico-formation" -}}
+<svg class="ico {{ $c }}" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5M22 9v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+{{- else if eq $n "ico-terrain" -}}
+<svg class="ico {{ $c }}" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16c0-4.4 3.1-8 7-8s7 3.6 7 8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M3 16.5h18M12 8v4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+{{- end -}}
